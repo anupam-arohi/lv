@@ -1,0 +1,10 @@
+PLF="watch.$SRCNAME".plist                      # Plist file for launchD
+
+cd $HOME/Library/LaunchAgents
+launchctl unload $PLF
+mv -v $PLF /tmp
+
+echo "$SRC is no longer being watched."
+echo "If you want to delete Live Repository, please do it manually."
+echo
+

@@ -1,0 +1,16 @@
+# Syntax check
+if [ -z "$1" ]; then
+	echo "Usage: $0 /folder/to/unwatch"
+	exit
+fi
+
+OS=`uname`
+
+if [ ! $OS == "Darwin" ]; then
+	echo "If you're using watcher.py"
+	echo "Please manually edit $HOME/.watcher/jobs.yml and delete $1 entry" 
+	echo "Or"
+	echo "If you're using incrond"
+	echo "Please manually edit using incrontab -e and delete $1 entry"
+	exit
+fi

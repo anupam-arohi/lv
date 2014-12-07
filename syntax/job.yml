@@ -1,0 +1,9 @@
+job7:
+  label: your.unique.label
+  watch: /full/path/to/source/folder
+  exclude: []
+  events: ['create', 'move_from', 'move_to', 'delete', 'modify']
+  options: []
+  recursive: true
+  command: /full/path/to/lv/ /full/path/to/source/folder /full/path/to/live/repository /optional/full/path/to/log/file
+

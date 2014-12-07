@@ -1,0 +1,15 @@
+# Test
+
+COUNT=`cat count_test.txt`
+today=`sed -n "${COUNT}p" days_test.txt`
+thisWeek=`sed -n "${COUNT}p" weeks_test.txt`
+
+echo ">$today >$thisWeek"
+
+COUNT=$(($COUNT + 1))
+echo $COUNT >count_test.txt
+
+date >>$SRC/date_file #modify source
+
+# Test - X - 
+

@@ -1,0 +1,38 @@
+#!/bin/bash
+
+OS=`uname`
+PTH=$HOME/bin   # You can change this to /usr/local/bin then you'll need to execute sudo source ./setup
+
+if [ ! -d "$PTH" ]; then
+	mkdir $PTH
+fi
+
+CHK=`echo $PATH | tr : '\n' | grep "$PTH"`
+
+if [ -z "$CHK" ]; then
+	echo "export PATH=$PTH:\$PATH"  >> $HOME/.bash_profile
+	export PATH=$PTH:$PATH  # So your current session will have PATH setup, that is why source setup, not ./setup
+fi
+	
+cd ./watch.parts
+
+if [ "$OS" == "Darwin" ]; then
+	cat begin ../LICENSE abspath defaults syntax src osx end     > ../watch
+else
+	cat begin ../LICENSE abspath defaults syntax src linux end   > ../watch
+fi
+
+cd ../unwatch.parts
+
+cat begin ../LICENSE check abspath src end > ../unwatch
+
+cd ..
+
+chmod +x ./lv ./watch ./unwatch 
+
+cp ./lv			$PTH
+mv ./watch   	$PTH
+mv ./unwatch 	$PTH
+
+echo "Success!"
+

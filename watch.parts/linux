@@ -1,0 +1,55 @@
+
+JOBSYML=$HOME/.watcher/jobs.yml
+
+if [ -f $JOBSYML ]; then
+
+	FOUND=`grep "$LABEL" $JOBSYML` || true
+
+	if [ ! -z "$FOUND" ]; then
+		echo "A job with same label is already present."
+		echo "Terminating..."
+		exit
+	fi
+
+	jobs=`grep "job[1-9][0-9]*:" $JOBSYML | wc -l` 
+	job_num=$(($jobs + 1))
+
+	echo "job$job_num:"																			>>$JOBSYML
+	echo "  label: $LABEL"																		>>$JOBSYML
+	echo "  watch: $SRC"																			>>$JOBSYML
+	echo "  exclude: []"																			>>$JOBSYML
+	echo "  events: ['create', 'move_from', 'move_to', 'delete', 'modify']"		>>$JOBSYML
+	echo "  options: []"																			>>$JOBSYML
+	echo "  recursive: true"																	>>$JOBSYML
+	echo "  command: $LV $SRC $LREPO $LOG "												>>$JOBSYML
+
+	WPATH=`which watcher.py`
+	if [ ! -z "$WPATH" ]; then
+		$WPATH stop || true
+		$WPATH start
+	else
+		echo "Since watcher.py is not in $PATH"
+		echo "Please restart watcher.py manually."
+	fi
+
+	$LV $SRC $LREPO $LOG $EMAIL > /dev/null   # Execute once for setup  
+
+elif [ -f /var/spool/incron/$USER ]; then
+
+	echo "$SRC IN_CREATE,IN_MOVE,IN_DELETE,IN_MODIFY,IN_NO_LOOP $LV $SRC $LREPO $LOG $EMAIL" >> /var/spool/incron/$USER
+	$LV $SRC $LREPO $LOG $EMAIL > /dev/null   # Execute once for setup  
+
+elif [ -d /var/spool/incron ]; then
+
+	echo "Execute incrontab -e, and add following line:"
+	echo "$SRC IN_CREATE,IN_MOVE,IN_DELETE,IN_MODIFY,IN_NO_LOOP $LV $SRC $LREPO $LOG $EMAIL" 
+	exit
+
+else
+
+	echo "Please install watcher from https://github.com/gregghz/Watcher for this to work"
+	echo "Or install incron. See http://www.cyberciti.biz/faq/linux-inotify-examples-to-replicate-directories/"
+	exit
+
+fi
+

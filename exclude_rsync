@@ -1,0 +1,10 @@
+- .git
+- *.swp
+- .DS_Store
+- ~*
+- $RECYCLE.BIN
+- Thumbs.db
+- desktop.ini
+- .svn
+- .cvs
+- .hg

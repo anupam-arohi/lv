@@ -1,0 +1,17 @@
+# Syntax check
+if [ -z "$1" ]; then
+	echo "Usage: $0 /folder/to/watch"
+	echo "Default LiveRepository would reside under $LVBASE"
+	echo "Default log file would be $LOGBASE/folder.lv.log"
+	exit
+fi
+
+LV=`which lv`
+
+if [ -z "$LV" ]; then
+	echo "Please place lv in searchable PATH."
+	echo "for example you can copy it to /$HOME/bin and update \$PATH in .bash_profile"
+	echo
+	exit
+fi
+

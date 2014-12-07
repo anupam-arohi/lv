@@ -1,0 +1,1 @@
+/full/path/to/source/folder IN_CREATE,IN_MOVE,IN_DELETE,IN_MODIFY,IN_NO_LOOP /full/path/to/lv /full/path/to/source/folder /full/path/to/live/repository/ /optional/full/path/to/log/file

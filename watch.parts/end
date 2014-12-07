@@ -1,0 +1,5 @@
+echo
+echo "$SRC is being watched."
+echo "Live Repository is set in $LREPO" 
+echo "You can check the logs from $LOG"
+

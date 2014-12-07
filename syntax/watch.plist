@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>your.unique.label</string>
+
+	 <key>ProgramArguments</key>
+	 	<array>
+	 		<string>/full/path/to/lv</string>
+	 		<string>/full/path/to/source/folder</string>
+	 		<string>/full/path/to/live/repository</string>
+	 		<string>/optional/full/path/to/log/file</string>
+	 		<string>optional@email</string>
+	 	</array>
+
+	 <key>WatchPaths</key>
+	 	<array>
+	 		<string>/full/path/to/source/folder</string>
+	 	</array>
+
+	 <key>RunAtLoad</key>
+		<true/>
+</dict>
+</plist>

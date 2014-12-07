@@ -1,0 +1,53 @@
+# Change these default locations to suit your needs
+lvHOME=$HOME/.LiveVersion
+
+if [ ! -f $lvHOME/lv_base ]; then
+
+	mkdir -p $lvHOME
+
+	echo -n "Please enter base location for Live Repositories (Default:$HOME/LiveRepos):"
+	read lvBase
+
+	if [ ! -z "$lvBase" ]; then 
+		abs_path $lvBase
+		lvBase=$ABS_PATH
+		echo "$lvBase" > $lvHOME/lv_base
+	else
+		echo "$HOME/LiveRepos"  > $lvHOME/lv_base
+	fi
+
+	echo -n "Please enter base location for logs (Default: $HOME/logs):"
+	read logBase
+
+	if [ ! -z "$logBase" ]; then 
+		abs_path $logBase
+		logBase=$ABS_PATH
+		echo "$logBase" > $lvHOME/log_base
+	else
+		echo "$HOME/logs"  > $lvHOME/log_base
+	fi
+
+	echo -n "Please enter default email:"
+	read email
+
+	if [ ! -z "$email" ]; then 
+		echo "$email" > $lvHOME/email
+	else
+		echo "" > $lvHOME/email
+	fi
+fi
+
+
+ARG=`cat $lvHOME/lv_base`
+abs_path $ARG
+LVBASE=$ABS_PATH
+
+ARG=`cat $lvHOME/log_base`
+abs_path $ARG
+LOGBASE=$ABS_PATH
+
+EMAIL=`cat $lvHOME/email`
+
+mkdir -p $LVBASE
+mkdir -p $LOGBASE											# Take this off in case logging bothers you
+

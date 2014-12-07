@@ -1,0 +1,50 @@
+# Creating the plist file for LaunchD
+
+TMPDIR=`mktemp -d /tmp/LV-XXXX`
+PLF=$TMPDIR/"watch.$SRCNAME".plist          # Plist file for launchD
+
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" 	                                                                > $PLF
+echo "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">" >> $PLF
+echo "<plist version=\"1.0\">"                                                                                    >> $PLF
+echo "<dict>"                                                                                                     >> $PLF
+echo "    <key>Label</key>"                                                                                       >> $PLF
+echo "    <string>$LABEL</string>"                                                                                >> $PLF
+echo                                                                                                              >> $PLF
+echo "	 <key>ProgramArguments</key>"                                                                            >> $PLF
+echo "	 	<array>"                                                                                              >> $PLF
+echo "	 		<string>$LV</string>"                                                                              >> $PLF
+echo "	 		<string>$SRC</string>"                                                                             >> $PLF
+echo "	 		<string>$LREPO</string>"                                                                           >> $PLF
+if [ ! -z "$LOG" ]; then
+echo "	 		<string>$LOG</string>"                                                                             >> $PLF 
+fi
+if [ ! -z "$EMAIL" ]; then
+echo "	 		<string>$EMAIL</string>"                                                                           >> $PLF 
+fi
+echo "	 	</array>"                                                                                             >> $PLF
+echo                                                                                                              >> $PLF
+echo "	 <key>WatchPaths</key>"                                                                                  >> $PLF
+echo "	 	<array>"                                                                                              >> $PLF
+echo "	 		<string>$SRC</string>"                                                                             >> $PLF
+echo "	 	</array>"                                                                                             >> $PLF
+echo                                                                                                              >> $PLF
+echo "</dict>"                                                                                                    >> $PLF
+echo "</plist>"                                                                                                   >> $PLF
+
+LOADED=`launchctl list | cut -f3 | grep $LABEL` || true
+if [ ! -z "$LOADED" ] && [ "$LOADED" == "$LABEL" ]; then
+	echo "A folder named $SRCNAME is already being watched"
+	echo "Maybe it has a different path"
+	echo "You may want to manually edit $PLF to make this work"
+	exit
+fi
+
+mkdir -p $HOME/Library/LaunchAgents/
+cp "$PLF" $HOME/Library/LaunchAgents/ 				   # So it is there next time your reboot/login
+launchctl load "$PLF"
+
+echo "Setting up Live Repository in $LREPO, please wait ..."
+$LV $SRC $LREPO $LOG $EMAIL > /dev/null				# You probably prefer to see the log file instead
+
+rm -rf $TMPDIR
+

@@ -1,0 +1,18 @@
+# Setting Source and Labels
+
+abs_path $1
+SRC=$ABS_PATH
+
+SRCNAME="`echo $SRC | rev | cut -d/ -f1 | rev `" 
+SRCNAME=`echo ${SRCNAME#.}`							
+
+PARENT="`echo $SRC | rev | cut -d/ -f2 | rev `" 
+if [ ! -z "$PARENT" ]; then
+	SRCNAME="`echo $SRCNAME.$PARENT`"
+fi
+
+LABEL=$USER.watch.$SRCNAME
+
+LREPO="$LVBASE/$SRCNAME"
+LOG="$LOGBASE/$SRCNAME.log"						# Take this off in case logging bothers you
+

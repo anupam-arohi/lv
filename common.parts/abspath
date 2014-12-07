@@ -1,0 +1,20 @@
+# computing absolute path from given path
+
+function abs_path()
+{
+	ABS_PATH=$1
+	
+	if [ "$ABS_PATH" == "." ] || [ "$ABS_PATH" == "./" ]; then	# Assuming you want to watch current path
+		ABS_PATH="`pwd`"
+	elif [[ "${ABS_PATH:0:2}" == "~/" ]]; then							
+		ABS_PATH="$HOME/${ABS_PATH:2:${#ABS_PATH}}"
+	elif [[ "${ABS_PATH:0:2}" == "./" ]]; then
+		ABS_PATH="`pwd`/${ABS_PATH:2:${#ABS_PATH}}"
+	elif [[ ! "${ABS_PATH:0:1}" == "/" ]]; then						# Assuming you want to watch a folder in current path
+		ABS_PATH="`pwd`/$ABS_PATH"
+	fi
+
+	ABS_PATH=`echo "${ABS_PATH%/}"`                           	# Truncate last /
+}
+
+
