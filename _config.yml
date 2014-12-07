@@ -1,0 +1,40 @@
+# Site wide configuration
+
+title: Live Version
+description: "An insurance system for your precious work!"
+logo: 120x120/lv-logo.png 
+teaser: 400x250/lv-teaser.png 
+locale: en_US
+url: http://anupam-arohi.com/lv
+
+# Jekyll configuration
+
+sass:
+  sass_dir: _sass
+  style: compressed
+permalink: /:categories/:title/
+markdown: kramdown
+highlighter: pygments
+gems:
+  - jekyll-sitemap
+
+
+# Site owner
+owner:
+  name: Anupam Arohi
+  web: http://anupam-arohi.com
+  email: arohi.misc@gmail.com
+  linkedin: bMAWZrT 
+  facebook: anupam.arohi
+  github:   anupam-arohi
+  twitter: 
+  bio: "A student of life with passion for technology and human psychology."
+  avatar: avatar.png 
+  google:
+    plus: 
+    ad-client: 
+    ad-slot: 
+  disqus-shortname:
+
+
+exclude: ["lib", "config.rb", ".sass-cache", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "*.sublime-project", "*.sublime-workspace", "Gemfile", "Gemfile.lock", "README.md", "LICENSE", "node_modules", "Gruntfile.js", "package.json"]

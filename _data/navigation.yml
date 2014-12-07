@@ -1,0 +1,21 @@
+# Site navigation links
+
+- title: Quick Start
+  url: /quick-start/
+  excerpt: "Everything you need to know to get started with Live Version"
+  image: 400x250/lv-logo.png
+
+- title: Documentation 
+  url: /documentation/
+  excerpt: "Live Version topics explained"
+  image: 400x250/lv-overview.png
+
+- title: Download
+  url: https://github.com/anupam-arohi/lv/archive/master.zip
+  excerpt: "Download Live Version on your computer"
+  image: 400x250/lv-logo.png
+
+- title: About
+  url: /about/
+  excerpt: "Who did this?"
+  image: 400x250/avatar.png

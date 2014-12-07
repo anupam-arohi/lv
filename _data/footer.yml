@@ -1,0 +1,20 @@
+# Footer navigation links
+
+- title: Home
+  url: /
+
+- title: Quick Start
+  url: /quick-start/
+
+- title: Documentation
+  url: /documentation/
+
+- title: Download
+  url: https://github.com/anupam-arohi/lv/archive/master.zip 
+
+- title: About
+  url: /about/
+
+- title: Terms
+  url: /terms/
+
