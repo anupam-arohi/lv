@@ -11,7 +11,7 @@
   image: 400x250/lv-overview.png
 
 - title: Download
-  url: https://github.com/anupam-arohi/lv/archive/master.zip
+  url: /download/
   excerpt: "Download Live Version on your computer"
   image: 400x250/lv-logo.png
 
