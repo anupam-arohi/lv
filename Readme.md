@@ -35,7 +35,7 @@ Following steps would get you started:
 
 In Example 1. `watch ~/projects/my_project`, watch command will:
 
-- Will ask for the default values (first time only).
+- Will ask for the default values (first time execution only).
 - Create a Live Repository in ~/LiveRepos.
 - On Mac, Create a new [LaunchAgent](http://goo.gl/FLeqgu) to watch the folder.
 - On Linux, Create a new [Watcher job](http://goo.gl/5edOBt) or [incrond](http://goo.gl/B2ZAfE) entry. 

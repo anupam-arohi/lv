@@ -51,6 +51,16 @@ lvDIR="$DES/.lv"
 # delete the git branches from live repository that are no longer relevant
 function cleanup {
 
+	cd "$lvDIR"
+
+	tail -`cat days_to_keep` keep_branch_days >temp
+	mv temp keep_branch_days
+
+	tail -`cat weeks_to_keep` keep_branch_weeks >temp
+	mv temp keep_branch_weeks
+
+	cd -
+
 	git branch --list | grep -v "`cat "$lvDIR"/keep_branch*`" | xargs -I Branch git branch -D Branch
 
 	# purge extra objects from git repository, has significant impact specially on large repositories
@@ -125,18 +135,9 @@ if [ ! -d "$lvDIR" ]; then
 	echo $thisWeek				 > keep_branch_weeks
 
    # Exclude these patterns while copying using rsync
-	echo "- .git"			    > exclude_rsync			# Manually edit exclude_rsync file within a live repository to make 
-	echo "- *.swp"				>> exclude_rsync			# custom exclusions for a specific Live Repository. Edit this
-	echo "- .DS_Store"		>> exclude_rsync			# section to amend exclusions for all live repositories.
-	
-	echo "- ~*"					>> exclude_rsync
-	echo "- \$RECYCLE.BIN"  >> exclude_rsync
-	echo "- Thumbs.db"      >> exclude_rsync
-	echo "- desktop.ini"    >> exclude_rsync
-
-	echo "- .svn"    			>> exclude_rsync
-	echo "- .cvs"    			>> exclude_rsync
-	echo "- .hg"    			>> exclude_rsync
+	cp $HOME/.LiveVersion/exclude_rsync .
+	cp $HOME/.LiveVersion/days_to_keep .
+	cp $HOME/.LiveVersion/weeks_to_keep .
 
 	cd .. #  lvDIR -> $DES
 
@@ -189,8 +190,7 @@ if [ "$today" != "$previousDay" ]; then
 	git checkout -b $today 
 
 	# update branches to keep
-	echo $today           > "$lvDIR"/keep_branch_days
-	echo $previousDay    >> "$lvDIR"/keep_branch_days
+	echo $today          >> "$lvDIR"/keep_branch_days
 
 	cleanup # Take this off if you would like to keep daily commits for a week
 fi
@@ -209,9 +209,7 @@ if [ "$thisWeek" != "$previousWeek" ]; then
 	git checkout -b $thisWeek 
 
 	# update branches to keep
-	echo $thisWeek         > "$lvDIR"/keep_branch_weeks
-	echo $previousWeek    >> "$lvDIR"/keep_branch_weeks
-
+	echo $thisWeek        >> "$lvDIR"/keep_branch_weeks
 	cleanup
 fi
 # Weekly Roll up - X -
@@ -231,5 +229,4 @@ echo $thisWeek > "$lvDIR"/previousWeek
 
 echo
 echo "-- Live Version ended at     : `date` --"
-email_log 
 

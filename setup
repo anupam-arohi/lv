@@ -34,5 +34,12 @@ cp ./lv			$PTH
 mv ./watch   	$PTH
 mv ./unwatch 	$PTH
 
+
+lvHome="$HOME/.LiveVersion"
+mkdir -p $lvHome
+cp ./exclude_rsync $lvHome
+cp ./days_to_keep $lvHome
+cp ./weeks_to_keep $lvHome
+
 echo "Success!"
 

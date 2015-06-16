@@ -1,6 +1,6 @@
 # Setting Source and Labels
 
-abs_path $1
+abs_path "$1"
 SRC=$ABS_PATH
 
 SRCNAME="`echo $SRC | rev | cut -d/ -f1 | rev `" 
@@ -14,5 +14,7 @@ fi
 LABEL=$USER.watch.$SRCNAME
 
 LREPO="$LVBASE/$SRCNAME"
+LREPO=${LREPO//\ /_}									# Replace space with underscore in Live Repository
 LOG="$LOGBASE/$SRCNAME.log"						# Take this off in case logging bothers you
+LOG=${LOG//\ /_}										# Replace space with underscore in log file
 

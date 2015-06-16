@@ -39,11 +39,11 @@ fi
 
 
 ARG=`cat $lvHOME/lv_base`
-abs_path $ARG
+abs_path "$ARG"
 LVBASE=$ABS_PATH
 
 ARG=`cat $lvHOME/log_base`
-abs_path $ARG
+abs_path "$ARG"
 LOGBASE=$ABS_PATH
 
 EMAIL=`cat $lvHOME/email`
