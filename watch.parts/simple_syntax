@@ -1,13 +1,12 @@
 # Syntax check
 if [ -z "$1" ]; then
-	echo "Usage: $0 /folder/to/watch [always]"
+	echo "Usage: $0 /folder/to/watch"
 	echo "Default LiveRepository would reside under $LVBASE"
 	echo "Default log file would be $LOGBASE/folder.lv.log"
-	echo "always would enable to send email each time an update happens."
 	exit
 fi
 
-LV=`which lv`
+LV=`which slv`
 
 if [ -z "$LV" ]; then
 	echo "Please place lv in searchable PATH."

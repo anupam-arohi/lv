@@ -1,3 +1,9 @@
+ALWAYS=`echo $2 | tr '[:upper:]' '[:lower:]'`
+if [ "x$ALWAYS" == "xalways" ]; then
+	touch "$LREPO/.lv/always_email_log"
+fi
+
+
 echo
 echo "$SRC is being watched."
 echo "Live Repository is set in $LREPO" 

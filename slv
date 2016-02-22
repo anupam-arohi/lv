@@ -48,39 +48,8 @@ LOG="$3"
 EMAIL="$4"
 lvDIR="$DES/.lv"
 
-# delete the git branches from live repository that are no longer relevant
-function cleanup {
-
-	cd "$lvDIR"
-
-	if [ ! -f days_to_keep ]; then
-		echo "4" > days_to_keep
-	fi
-
-	if [ ! -f weeks_to_keep ]; then
-		echo "2" > weeks_to_keep
-	fi
-
-	tail -`cat days_to_keep` keep_branch_days >temp
-	mv temp keep_branch_days
-
-	tail -`cat weeks_to_keep` keep_branch_weeks >temp
-	mv temp keep_branch_weeks
-
-	cd -
-
-	git branch --list | grep -v "`cat "$lvDIR"/keep_branch*`" | xargs -I Branch git branch -D Branch
-
-	# purge extra objects from git repository, has significant impact specially on large repositories
-	rm -rf .git/refs/original/*
-	git reflog expire --all --expire-unreachable=0
-	git repack -A -d
-	git prune
-}
-
-# At the moment, it works from direct shell execution, maybe in future, it'll work from LaunchD and incron/watcher
 function email_log() { 									  
-	if [ ! -z "$EMAIL" ]; then
+	if [ ! -z "$LOG" ] && [ ! -z "$EMAIL" ]; then
 			mailx -s "Live Version | `hostname` | $SRC --> $DES" $EMAIL < "$LOG"
 	fi
 }
@@ -104,9 +73,6 @@ echo
 echo "$SRC --> $DES"
 echo 
 
-today=`date "+%d-%b-%Y"`       # e.g. 17-Jul-2014
-thisWeek="W`date "+%V-%Y"`"    # e.g. W29-2014
-
 # Setup
 if [ ! -d "$lvDIR" ]; then
 
@@ -119,27 +85,15 @@ if [ ! -d "$lvDIR" ]; then
 
 	cd "$lvDIR"
 
-	echo $today					 > previousDay  
-	echo $thisWeek				 > previousWeek
-
-	# Keep these branches while deleting others
-	echo "master"				 > keep_branch_always   # Manually edit this file to preserve specific branch(es)
-	echo $thisWeek				 > keep_branch_weeks
-
    # Exclude these patterns while copying using rsync
 	cp $HOME/.LiveVersion/exclude_rsync .
 	cp $HOME/.LiveVersion/exclude_diff .
-	cp $HOME/.LiveVersion/days_to_keep .
-	cp $HOME/.LiveVersion/weeks_to_keep .
 
 	cd .. #  lvDIR -> $DES
 
 	git init
 	git add . -Av
 	git commit -m "Live Repository initialized!"
-
-	git branch $thisWeek
-	git branch $today
 
 	git log  -1 | head -1 | cut -f2 -d' ' > "$lvDIR"/lastSHA 
 
@@ -171,9 +125,6 @@ else
 	fi
 fi
 
-# load logged time stamp in variables
-previousDay=`cat "$lvDIR"/previousDay`
-previousWeek=`cat "$lvDIR"/previousWeek`
 lastSHA=`cat "$lvDIR"/lastSHA` 							  # It will act as recovery point in case you checked out some other sha
 
 cd "$DES"
@@ -183,45 +134,8 @@ if [ "$currentSHA" != "$lastSHA" ]; then
 	git checkout $lastSHA
 fi
 
-# Daily Roll up
-if [ "$today" != "$previousDay" ]; then
-
-	echo "------------------------------------------"
-	echo "Rolling up daily commits."
-	echo "------------------------------------------"
-
-	git checkout $previousWeek 
-	git merge $previousDay --squash -s recursive -X theirs
-	git commit -vam "$previousDay (After daily rollup)" || true # git commit returns error when there is nothing to commit, which is a normal usecase for live version
-	git checkout -b $today 
-
-	# update branches to keep
-	echo $today          >> "$lvDIR"/keep_branch_days
-
-	cleanup # Take this off if you would like to keep daily commits for a week
-fi
-# Daily Roll up - X -
-
-# Weekly Roll up, it'll happen after daily roll up
-if [ "$thisWeek" != "$previousWeek" ]; then
-
-	echo "------------------------------------------"
-	echo "Rolling up Weekly commits."
-	echo "------------------------------------------"
-
-	git checkout master
-	git merge $previousWeek --squash -s recursive -X theirs 
-	git commit -vam "$previousWeek (After weekly rollup)" || true 
-	git checkout -b $thisWeek 
-
-	# update branches to keep
-	echo $thisWeek        >> "$lvDIR"/keep_branch_weeks
-	cleanup
-fi
-# Weekly Roll up - X -
 
 #  Sync
-git checkout $today 
 rsync -aruvh --delete --exclude-from "$lvDIR"/exclude_rsync "$SRC" "$DES" # Add more excludes as per your needs to exclude_rsync
 #  Sync - X - 
 
@@ -229,9 +143,6 @@ git add . -Av
 git commit -m "After Sync. [`date`]" || true 
 git log  -1 | head -1 | cut -f2 -d' ' > "$lvDIR"/lastSHA
 
-# update logged time stamp when all went well
-echo $today    > "$lvDIR"/previousDay
-echo $thisWeek > "$lvDIR"/previousWeek
 
 echo
 echo "-- Live Version ended at     : `date` --"
@@ -240,7 +151,7 @@ echo "-- Live Version ended at     : `date` --"
 # in case you're watching folders that change seldom and you want to be
 # informed whenever they do, add an empty file named "always_email_log" in .lv folder
 # of destination directory.
-if [ ! -z "$EMAIL" ] && [ -f $lvDIR/always_email_log ]; then
+if [ ! -z "$EMAIL" ] && [ ! -z "$LOG" ] && [ -f $lvDIR/always_email_log ]; then
 	nothingChanged=`grep "nothing to commit" $LOG`
 	if [ -z "$nothingChanged" ]; then
 		email_log

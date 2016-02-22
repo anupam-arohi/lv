@@ -17,9 +17,11 @@ fi
 cd ./watch.parts
 
 if [ "$OS" == "Darwin" ]; then
-	cat begin ../LICENSE abspath defaults syntax src osx end     > ../watch
+	cat begin ../LICENSE abspath defaults syntax src osx end     		  > ../watch
+	cat begin ../LICENSE abspath defaults simple_syntax src osx end     > ../swatch
 else
-	cat begin ../LICENSE abspath defaults syntax src linux end   > ../watch
+	cat begin ../LICENSE abspath defaults syntax src linux end   		  > ../watch
+	cat begin ../LICENSE abspath defaults simple_syntax src linux end   > ../swatch
 fi
 
 cd ../unwatch.parts
@@ -28,16 +30,19 @@ cat begin ../LICENSE check abspath src end > ../unwatch
 
 cd ..
 
-chmod +x ./lv ./watch ./unwatch 
+chmod +x ./lv ./watch ./unwatch ./slv ./swatch
 
 cp ./lv			$PTH
+cp ./slv			$PTH
 mv ./watch   	$PTH
+mv ./swatch   	$PTH
 mv ./unwatch 	$PTH
 
 
 lvHome="$HOME/.LiveVersion"
 mkdir -p $lvHome
 cp ./exclude_rsync $lvHome
+cp ./exclude_diff $lvHome
 cp ./days_to_keep $lvHome
 cp ./weeks_to_keep $lvHome
 

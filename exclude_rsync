@@ -1,7 +1,6 @@
 - .git
-- *.swp
+- .swp
 - .DS_Store
-- ~*
 - $RECYCLE.BIN
 - Thumbs.db
 - desktop.ini
