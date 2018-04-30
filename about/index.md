@@ -16,9 +16,6 @@ ads: false
 ![Anupam](../images/avatar.png) 
 
 
-Anupam works as a [Project Manager](http://goo.gl/qWutKc) for [Solibri](http://www.solibri.com). 
-
-
 In his leisure time, he likes to: 
 
 - Catch up with people in life,
