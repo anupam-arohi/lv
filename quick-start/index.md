@@ -14,6 +14,7 @@ share: false
 ---
 
 ## Prerequisites 
+- Linux or Mac system (This for you if you're comfy with the terminal)
 - [git](http://goo.gl/8O8hz)
 - [watcher](https://github.com/gregghz/Watcher) (only for Linux)
 
