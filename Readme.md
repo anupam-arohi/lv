@@ -54,7 +54,6 @@ Where:
 - `/full/source/path` is the absolute path of the file or folder that you want to be versioned live.
 - `/full/destination/path` is absolute path of the Live Repository where a versioned copy of the source would reside.
 - `/log/file` is an optional parameter that gives absolute path of the log file where log of activities would be kept.
-- `email` is an experimental feature; works only on shell environment. 
 
 This is one time execution, you may want to add this to your build script or custom [launchd property list file](http://goo.gl/8KeHBU), or [incrontab](http://goo.gl/B2ZAfE) entry.
 
