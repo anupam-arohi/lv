@@ -78,7 +78,6 @@ function cleanup {
 	git prune
 }
 
-# At the moment, it works from direct shell execution, maybe in future, it'll work from LaunchD and incron/watcher
 function email_log() { 									  
 	if [ ! -z "$EMAIL" ]; then
 			mailx -s "Live Version | `hostname` | $SRC --> $DES" $EMAIL < "$LOG"
