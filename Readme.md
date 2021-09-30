@@ -69,7 +69,7 @@ Check out [documentation][recovery] for more details.
 Happy Versioning!
 
 [dnld]: https://github.com/anupam-arohi/lv/archive/master.zip 
-[recovery]: http://anupam-arohi.com/lv/documentation/Recovery/ 
-[home]: http://anupam-arohi.com/lv 
+[recovery]: http://anupam.info/lv/documentation/Recovery/ 
+[home]: http://anupam.info/lv 
 
 
