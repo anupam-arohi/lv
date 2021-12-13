@@ -5,7 +5,8 @@ description: "An insurance system for your precious work!"
 logo: 120x120/lv-logo.png 
 teaser: 400x250/lv-teaser.png 
 locale: en_US
-url: http://anupam-arohi.com/lv
+url: http://anupam-arohi.github.io/lv
+
 
 # Jekyll configuration
 
@@ -22,7 +23,7 @@ gems:
 # Site owner
 owner:
   name: Anupam Arohi
-  web: http://anupam-arohi.com
+  web: http://anupam-arohi.github.io
   email: arohi.misc@gmail.com
   linkedin: bMAWZrT 
   facebook: anupam.arohi
