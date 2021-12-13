@@ -89,6 +89,6 @@ Check out [documentation][recovery] for more details.
 Happy Versioning!
 
 [dnld]: https://github.com/anupam-arohi/lv/archive/master.zip
-[recovery]: http://anupam-arohi.com/lv/documentation/Recovery/ 
+[recovery]: http://anupam-arohi.github.io/lv/documentation/Recovery/ 
 
 
