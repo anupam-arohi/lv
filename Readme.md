@@ -1,4 +1,4 @@
-# [Live Version][home]
+# [Live Version](http://anupam-arohi.github.io/lv/)
 
 An insurance system for your precious work!
 ![](images/lv-overview.png)
