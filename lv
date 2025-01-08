@@ -192,7 +192,13 @@ if [ "$today" != "$previousDay" ]; then
 	git checkout $previousWeek 
 	git merge $previousDay --squash -s recursive -X theirs
 	git commit -vam "$previousDay (After daily rollup)" || true # git commit returns error when there is nothing to commit, which is a normal usecase for live version
-	git checkout -b $today 
+ 	# Check if the branch for today already exists
+    	if ! git rev-parse --verify "$today" > /dev/null 2>&1; then
+        	git branch $today
+    	else
+        	echo "Branch '$today' already exists, checking it out."
+        	git checkout $today
+    	fi
 
 	# update branches to keep
 	echo $today          >> "$lvDIR"/keep_branch_days
@@ -211,7 +217,13 @@ if [ "$thisWeek" != "$previousWeek" ]; then
 	git checkout master
 	git merge $previousWeek --squash -s recursive -X theirs 
 	git commit -vam "$previousWeek (After weekly rollup)" || true 
-	git checkout -b $thisWeek 
+	# Check if the branch for this week already exists
+    	if ! git rev-parse --verify "$thisWeek" > /dev/null 2>&1; then
+        	git branch $thisWeek
+    	else
+        	echo "Branch '$thisWeek' already exists, checking it out."
+        	git checkout $thisWeek
+    	fi
 
 	# update branches to keep
 	echo $thisWeek        >> "$lvDIR"/keep_branch_weeks
