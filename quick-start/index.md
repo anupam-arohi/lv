@@ -7,7 +7,7 @@ excerpt: "Get up and running with Live Version in a few minutes"
 tags: [Quick Start, Live Version]
 image:
   feature: 
-  teaser: 400x250/logo.png
+  teaser: 400x250/lv-logo.png
   thumb:
 toc: true
 share: false
@@ -89,6 +89,6 @@ Check out [documentation][recovery] for more details.
 Happy Versioning!
 
 [dnld]: https://github.com/anupam-arohi/lv/archive/master.zip
-[recovery]: http://anupam-arohi.github.io/lv/documentation/Recovery/ 
+[recovery]: {{ site.baseurl }}/documentation/Recovery/ 
 
 

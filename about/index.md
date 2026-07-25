@@ -6,14 +6,14 @@ modified:
 excerpt: "Who wrote Live Version?" 
 image:
   feature: 
-  teaser: lv-teaser.png
+  teaser: 400x250/avatar.png
   thumb: 
 share: false
 social: true
 ads: false
 ---
 
-![Anupam](../images/avatar.png) 
+![Anupam]({{ site.baseurl }}/images/avatar.png) 
 
 
 In his leisure time, he likes to: 

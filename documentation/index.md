@@ -7,7 +7,7 @@ excerpt:
 tags: [Live Version, documentation]
 image:
   feature: lv-overview.png 
-  teaser: lv-teaser-400x250.png
+  teaser: 400x250/lv-teaser.png
 ---
 
 <div class="tiles">
