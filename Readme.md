@@ -3,7 +3,8 @@
 An insurance system for your precious work!
 ![](images/lv-overview.png)
 
-## Prerequisites 
+## Prerequisites
+- Linux or Mac system (this is for you if you're comfy with the terminal)
 - [git](http://goo.gl/8O8hz)
 - [watcher](https://github.com/gregghz/Watcher) (only for Linux)
 
@@ -69,7 +70,7 @@ Check out [documentation][recovery] for more details.
 Happy Versioning!
 
 [dnld]: https://github.com/anupam-arohi/lv/archive/master.zip 
-[recovery]: http://anupam-arohi.github.io/lv/documentation/Recovery/ 
-[home]: http://anupam-arohi.github.io
+[recovery]: https://anupam-arohi.github.io/lv/documentation/Recovery/ 
+[home]: https://anupam-arohi.github.io/lv/
 
 
