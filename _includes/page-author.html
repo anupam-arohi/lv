@@ -6,6 +6,7 @@
 	<img src="{{ site.baseurl }}/images/{{ author.avatar }}" alt="{{ author.name }}">
 </div><!-- ./author-image -->
 <div class="author-content">
-	<h3 class="author-name" >Written by {% if author.web %}<a href="{{ author.web }}" itemprop="author">{{ author.name }}</a>{% else %}<span itemprop="author">{{ author.name }}</span>{% endif %}</h3>
+	{% if author.web contains 'http' %}{% assign author_web = author.web %}{% else %}{% assign author_web = author.web | prepend: site.baseurl %}{% endif %}
+	<h3 class="author-name" >Written by {% if author.web %}<a href="{{ author_web }}" itemprop="author">{{ author.name }}</a>{% else %}<span itemprop="author">{{ author.name }}</span>{% endif %}</h3>
 	<p class="author-bio">{{ author.bio }}</p>
 </div><!-- ./author-content -->
