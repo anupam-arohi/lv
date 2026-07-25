@@ -3,9 +3,11 @@
 An insurance system for your precious work!
 ![](images/lv-overview.png)
 
+Full documentation: <https://anupam-arohi.github.io/lv/>
+
 ## Prerequisites
 - Linux or Mac system (this is for you if you're comfy with the terminal)
-- [git](http://goo.gl/8O8hz)
+- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [watcher](https://github.com/gregghz/Watcher) (only for Linux)
 
 ## Installation
@@ -38,8 +40,8 @@ In Example 1. `watch ~/projects/my_project`, watch command will:
 
 - Will ask for the default values (first time only).
 - Create a Live Repository in ~/LiveRepos.
-- On Mac, Create a new [LaunchAgent](http://goo.gl/FLeqgu) to watch the folder.
-- On Linux, Create a new [Watcher job](http://goo.gl/5edOBt) or [incrond](http://goo.gl/B2ZAfE) entry. 
+- On Mac, Create a new [LaunchAgent](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html) to watch the folder.
+- On Linux, Create a new [Watcher job](https://github.com/gregghz/Watcher/blob/master/jobs.yml) or [incrond](https://www.cyberciti.biz/faq/linux-inotify-examples-to-replicate-directories/) entry. 
 - Live Version activity would be logged in `~/logs/my_project.projects.log` by default.
 
 Note: incrond works only at single directory level, changes in subdirectories are not tracked by it.
@@ -56,12 +58,12 @@ Where:
 - `/log/file` is an optional parameter that gives absolute path of the log file where log of activities would be kept.
 - `email` is an experimental feature; works only on shell environment. 
 
-This is one time execution, you may want to add this to your build script or custom [launchd property list file](http://goo.gl/8KeHBU), or [incrontab](http://goo.gl/B2ZAfE) entry.
+This is one time execution, you may want to add this to your build script or custom [launchd property list file](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html), or [incrontab](https://www.cyberciti.biz/faq/linux-inotify-examples-to-replicate-directories/) entry.
 
 
 ## Recovery
 
-To harness the power of Live Version, you would need a graphical [git client](http://git-scm.com/downloads/guis) such as [Source Tree](http://www.sourcetreeapp.com/).
+To harness the power of Live Version, you would need a graphical [git client](https://git-scm.com/downloads/guis) such as [Source Tree](https://www.sourcetreeapp.com/).
 
 Once you have the client, you can open your Live Repository in the client and see the changes in much clear context.
 
