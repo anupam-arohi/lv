@@ -24,6 +24,7 @@ In my leisure time, I like to:
 - Catch up with people in life,
 - Do juicing,
 - Visit nature spots and feed birds and squirrels,
+- [Hunt northern lights](https://anupam-arohi.github.io/auroras/),
 - Play badminton, poker and chess,
 - Fly Indian kites,
 - Make soap bubbles,
