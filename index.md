@@ -28,3 +28,13 @@ image:
 </div><!-- /.tile -->
 
 </div><!-- /.tiles -->
+
+<div class="page-footer">
+  <div class="author-image">
+    <img src="{{ site.baseurl }}/images/{{ site.owner.avatar }}" alt="{{ site.owner.name }}">
+  </div><!-- /.author-image -->
+  <div class="author-content">
+    <h3 class="author-name">About the author</h3>
+    <p class="author-bio">Live Version was written in 2014 by <a href="https://anupam-arohi.github.io/about/">Anupam Arohi</a>, a Product Owner at ABB Drives in Helsinki. It came out of a habit of commenting out code he was not ready to delete and zipping folders he was afraid to lose. LV has been quietly backing up his work ever since.</p>
+  </div><!-- /.author-content -->
+</div><!-- /.page-footer -->
